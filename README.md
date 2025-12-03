@@ -44,7 +44,7 @@ Starts the workflow when you send a message.
 
 ### 4️⃣ Add the AI Agent Node  
 This is your “SQL Analyst.”  
-Give it a system message like:  
+Use a system message like:  
 “Convert natural language to SQL. If unclear, ask questions. If no data exists, say so clearly.”
 
 ### 5️⃣ Attach the Tools  
@@ -74,5 +74,11 @@ Try questions like:
 - Google Gemini  
 - PostgreSQL  
 - AI Agent + Memory  
+
+---
+
+## 🔗 n8n Workflow Link  
+Here is the live workflow link for this project:  
+👉 **https://sd210228.app.n8n.cloud/workflow/fVSX47s7vZcuio9e**
 
 ---
