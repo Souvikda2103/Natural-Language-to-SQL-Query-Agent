@@ -1,84 +1,78 @@
 # 🤖 Natural Language to SQL Query Agent  
-🔗 👉 Workflow: Ask Questions in Plain English → Get Answers Directly from PostgreSQL
+Ask questions in plain English → Get answers directly from PostgreSQL.
 
 ---
 
 ## 🎯 Objective  
-To build an AI-powered SQL Agent in n8n that allows users to ask questions in plain English (e.g., “Show me sales from Mumbai last month”) and automatically converts them into SQL queries, executes them on a PostgreSQL database, and returns meaningful answers — without requiring any SQL knowledge.
+Build an AI system in n8n that lets users ask normal questions like  
+“Show me sales from Mumbai last month”  
+and automatically converts them into SQL, runs the query, and shows the result — without the user writing SQL.
 
 ---
 
-## 🧩 What This Automation Does  
-
-This workflow enables intelligent, conversational database querying:
-
-- Understands user questions in plain English  
-- Converts natural language → SQL query using AI  
-- Checks table structure & schema automatically  
-- Executes queries safely on PostgreSQL  
-- Returns clean, readable answers  
-- Asks follow-up questions if the query is unclear  
-- Handles “no data found” scenarios gracefully  
-
-✨ Your AI becomes a **smart junior data analyst** inside n8n.
+## 🧾 What This Automation Does  
+- Understands your question (plain English)  
+- Converts it into a correct SQL query  
+- Checks database tables and columns  
+- Runs the SQL on PostgreSQL  
+- Shows the results in chat  
+- Asks follow-up questions if your query is unclear  
+- Tells you clearly when no data exists for your question  
 
 ---
 
-## 🧠 Mindset / Thought Process  
-1. Build an experience where users chat naturally with the system.  
-2. Use AI to convert natural language into SQL queries.  
-3. Provide the agent with tools to run queries directly on PostgreSQL.  
-4. Test with simple → complex queries to ensure reliability.
+## 🧠 How It Works  
+1. You send a message → workflow starts  
+2. AI Agent reads your question  
+3. AI understands table structure  
+4. AI creates the right SQL query  
+5. Query is executed in PostgreSQL  
+6. Result is shown back to you in simple text  
 
 ---
 
-## 🏗️ Solution Design  
+## 🛠️ Steps to Build  
+### 1️⃣ Create or open your n8n account  
+https://app.n8n.cloud/register
 
-- Trigger that listens to messages (chat-based workflow)  
-- AI Agent that understands questions and plans the response  
-- Tools to inspect database schema and execute SQL queries  
-- Gemini model for natural language → SQL generation  
-- Memory node to maintain context across the conversation  
-
----
-
-## 🛠️ Step-by-Step Execution  
-
-### **1️⃣ Set up n8n**
-Create a cloud account or self-host locally.  
-🔗 https://app.n8n.cloud/register  
-
----
-
-### **2️⃣ Use AI Tools to Draft the Flow**
-Use ChatGPT/Perplexity for designing the automation.  
+### 2️⃣ Use ChatGPT/Perplexity to draft the automation steps  
 Prompt example:  
-> I want to create an AI Agent in n8n that converts natural language to SQL, executes it on Postgres, checks data availability, and handles follow-up questions.
+“Help me create an AI agent that converts English to SQL and runs the query in Postgres.”
+
+### 3️⃣ Add the Chat Trigger  
+Starts the workflow when you send a message.
+
+### 4️⃣ Add the AI Agent Node  
+This is your “SQL Analyst.”  
+Give it a system message like:  
+“Convert natural language to SQL. If unclear, ask questions. If no data exists, say so clearly.”
+
+### 5️⃣ Attach the Tools  
+- Tool 1: Check table schema  
+- Tool 2: Run SQL query  
+- Add Gemini model and memory  
+
+### 6️⃣ Test  
+Try questions like:  
+- “Show me last month’s sales.”  
+- “Top 5 customers by revenue.”  
+- “Orders from Mumbai in 2024.”
 
 ---
 
-### **3️⃣ Trigger (Chat Listener)**  
-Starts the workflow whenever a user sends a chat message.
+## 🏁 Final Result  
+- Users chat with the database  
+- No SQL skills needed  
+- AI handles the thinking  
+- Accurate answers in seconds  
+- Perfect for teams who want instant insights
 
 ---
 
-### **4️⃣ Add the AI Agent Node**  
-This is your “smart junior SQL analyst.”
-
-Use this system message (or generate a custom one):
-
-> Act as a SQL Agent. Convert natural language questions into SQL queries. Understand available tables/columns. Ask follow-up questions when unclear. If no data exists, respond: “There is no available data to answer the question, but I can help with the following details.”
+## 🧰 Tools Used  
+- n8n  
+- Google Gemini  
+- PostgreSQL  
+- AI Agent + Memory  
 
 ---
-
-### **5️⃣ Give Intelligence to the Agent**
-
-Attach essential tools:
-
-#### ✔ Schema Inspector Tool  
-Agent checks table structure using SQL like:  
-```sql
-SELECT table_name, column_name, data_type, is_nullable
-FROM information_schema.columns
-WHERE table_schema = 'public'
-ORDER BY table_name, ordinal_position;
